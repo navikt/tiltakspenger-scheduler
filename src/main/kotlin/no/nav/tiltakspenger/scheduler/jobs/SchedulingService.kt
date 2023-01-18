@@ -30,4 +30,12 @@ class SchedulingService(
         scheduler.deleteJob(job.key)
         scheduler.scheduleJob(job, trigger)
     }
+
+    fun start() {
+        scheduler.start()
+    }
+
+    fun stop() {
+        scheduler.standby()
+    }
 }

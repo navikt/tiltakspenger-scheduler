@@ -17,13 +17,13 @@ internal class ApplicationBuilder : RapidsConnection.StatusListener {
         }
         .build()
 
+    val scheduler = SchedulingService(
+        databaseConfig = Configuration.databaseConfig(),
+        rapidsConnection = rapidsConnection
+    )
+
     init {
         rapidsConnection.register(this)
-        val scheduler = SchedulingService(
-            databaseConfig = Configuration.databaseConfig(),
-            rapidsConnection = rapidsConnection
-        )
-        scheduler.scheduleJob()
     }
 
     fun start() {
@@ -32,11 +32,14 @@ internal class ApplicationBuilder : RapidsConnection.StatusListener {
 
     override fun onShutdown(rapidsConnection: RapidsConnection) {
         log.info("Shutdown")
+        scheduler.stop()
     }
 
     override fun onStartup(rapidsConnection: RapidsConnection) {
         log.info("Skal kjøre flyway migrering")
         flywayMigrate()
         log.info("Har kjørt flyway migrering")
+        scheduler.scheduleJob()
+        scheduler.start()
     }
 }

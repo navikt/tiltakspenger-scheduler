@@ -45,7 +45,6 @@ class JobSchedulerManager(
         val schedulerFactory: SchedulerFactory = StdSchedulerFactory(props)
         val scheduler = schedulerFactory.scheduler
         scheduler.setJobFactory(jobFactory)
-        scheduler.start()
         return scheduler
     }
 }
