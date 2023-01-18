@@ -1,26 +1,34 @@
 package no.nav.tiltakspenger.scheduler.jobs
 
+import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.JsonMessage
 import no.nav.helse.rapids_rivers.RapidsConnection
 import no.nav.tiltakspenger.scheduler.domain.*
 import java.time.LocalDateTime
 import java.util.UUID
 
+
+private val log = KotlinLogging.logger {}
+
 class RapidEventPublisher(private val rapidsConnection: RapidsConnection) : EventsPublisher {
-    override fun publishEvent(dayHasBegun: DayHasBegun) {
-        publish("dayHasBegun" to dayHasBegun)
+    override fun publishDayHasBegun(dayHasBegun: DayHasBegun) {
+        log.info { "Publising dayHasBegun" }
+        publish("dayHasBegun" to dayHasBegun.date.toString())
     }
 
-    override fun publishEvent(weekHasBegun: WeekHasBegun) {
-        publish("weekHasBegun" to weekHasBegun)
+    override fun publishWeekHasBegun(weekHasBegun: WeekHasBegun) {
+        log.info { "Publising weekHasBegun" }
+        publish("weekHasBegun" to weekHasBegun.yearWeek.toString())
     }
 
-    override fun publishEvent(monthHasBegun: MonthHasBegun) {
-        publish("monthHasBegun" to MonthHasBegun)
+    override fun publishMonthHasBegun(monthHasBegun: MonthHasBegun) {
+        log.info { "Publising monthHasBegun" }
+        publish("monthHasBegun" to monthHasBegun.month.toString())
     }
 
-    override fun publishEvent(yearHasBegun: YearHasBegun) {
-        publish("yearHasBegun" to YearHasBegun)
+    override fun publishYearHasBegun(yearHasBegun: YearHasBegun) {
+        log.info { "Publising yearHasBegun" }
+        publish("yearHasBegun" to yearHasBegun.year.toString())
     }
 
     private fun publish(messagePair: Pair<String, Any>) {
@@ -34,6 +42,7 @@ class RapidEventPublisher(private val rapidsConnection: RapidsConnection) : Even
             .plus(messagePair)
             .let { JsonMessage.newMessage(it) }
             .also { message ->
+                log.info { "Publishing ${message.toJson()}" }
                 rapidsConnection.publish(uuid, message.toJson())
             }
     }

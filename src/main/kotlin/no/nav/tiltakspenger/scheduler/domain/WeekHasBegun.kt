@@ -1,14 +1,11 @@
 package no.nav.tiltakspenger.scheduler.domain
 
-import java.time.Year
+import org.threeten.extra.YearWeek
 
 
-data class WeekHasBegun private constructor(
-    private val year: Year,
-    private val week: Int,
-) {
+data class WeekHasBegun private constructor(val yearWeek: YearWeek) {
+
     companion object {
-        fun of(year: Year, week: Int): WeekHasBegun =
-            WeekHasBegun(year, week)
+        fun of(yearWeek: YearWeek): WeekHasBegun = WeekHasBegun(yearWeek)
     }
 }

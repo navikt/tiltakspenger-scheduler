@@ -5,12 +5,13 @@ import no.nav.tiltakspenger.scheduler.Configuration
 import org.quartz.CronScheduleBuilder.dailyAtHourAndMinute
 import org.quartz.JobBuilder.newJob
 import org.quartz.JobDetail
-import org.quartz.SimpleScheduleBuilder
+import org.quartz.ScheduleBuilder
 import org.quartz.TriggerBuilder.newTrigger
 
 class SchedulingService(
     databaseConfig: Configuration.DatabaseConfig,
-    rapidsConnection: RapidsConnection
+    rapidsConnection: RapidsConnection,
+    private val scheduleBuilder: ScheduleBuilder<*> = dailyAtHourAndMinute(0, 0)
 ) {
     private val publisherJobFactory = PublishingJobFactory(rapidsConnection)
     private val scheduler =
@@ -18,16 +19,7 @@ class SchedulingService(
 
     private val trigger = newTrigger()
         .withIdentity("dailyTrigger", "onlyGroup")
-        .withSchedule(dailyAtHourAndMinute(0, 0))
-        .build()
-
-    private val testTrigger = newTrigger()
-        .withIdentity("testTrigger", "onlyGroup")
-        .withSchedule(
-            SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(1)
-                .withRepeatCount(2)
-        )
+        .withSchedule(scheduleBuilder)
         .build()
 
     private var job: JobDetail = newJob(PassageOfTimeEventsPublishingJob::class.java)
@@ -35,10 +27,7 @@ class SchedulingService(
         .build()
 
     fun scheduleJob() {
+        scheduler.deleteJob(job.key)
         scheduler.scheduleJob(job, trigger)
-    }
-
-    fun scheduleTestJob() {
-        scheduler.scheduleJob(job, testTrigger)
     }
 }

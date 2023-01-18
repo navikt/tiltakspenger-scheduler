@@ -33,6 +33,7 @@ dependencies {
     implementation("com.natpryce:konfig:1.6.10.0")
 
     implementation("org.quartz-scheduler:quartz:2.3.2")
+    implementation("org.threeten:threeten-extra:1.7.2")
 
     implementation("net.logstash.logback:logstash-logback-encoder:7.2")
     implementation("ch.qos.logback:logback-classic:1.4.5")
