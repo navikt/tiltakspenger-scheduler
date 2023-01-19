@@ -24,20 +24,25 @@ class HourlyPassageOfTimeEventsPublishingJob(
         val startTime = context.trigger.startTime // TODO: Det viser seg at denne ikke er korrekt dessverre!
         log.info { "context.trigger.starttime $startTime" }
 
-        val nextFireTime = context.trigger.nextFireTime
-        log.info { "nextFireTime $nextFireTime" }
-        val subsequentFireTime = context.trigger.getFireTimeAfter(nextFireTime);
-        log.info { "subsequentFireTime $subsequentFireTime" }
-        val interval = subsequentFireTime.time - nextFireTime.time;
+        try {
+            val nextFireTime = context.trigger.nextFireTime
+            log.info { "nextFireTime $nextFireTime" }
+            val subsequentFireTime = context.trigger.getFireTimeAfter(nextFireTime);
+            log.info { "subsequentFireTime $subsequentFireTime" }
+            val interval = subsequentFireTime.time - nextFireTime.time;
 
-        val previousFireTime = context.trigger.previousFireTime
-        log.info { "previousFireTime $previousFireTime" }
+            val previousFireTime = context.trigger.previousFireTime
+            log.info { "previousFireTime $previousFireTime" }
+
+            val thisFireTime = Date(nextFireTime.time - interval)
+            log.info { "thisFireTime $thisFireTime" }
+
+        } catch (t: Throwable) {
+            log.warn("Ooops", t)
+        }
 
         val scheduledFireTime = context.scheduledFireTime
         log.info { "scheduledFireTime $scheduledFireTime" }
-
-        val thisFireTime = Date(nextFireTime.time - interval)
-        log.info { "thisFireTime $thisFireTime" }
 
         val localDateTime = LocalDateTime.ofInstant(
             scheduledFireTime.toInstant(),
