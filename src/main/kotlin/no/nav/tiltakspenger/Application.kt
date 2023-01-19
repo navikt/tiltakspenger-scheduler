@@ -8,7 +8,7 @@ import no.nav.tiltakspenger.scheduler.db.flywayMigrate
 import no.nav.tiltakspenger.scheduler.jobs.SchedulingService
 
 fun main() {
-    System.setProperty("logback.configurationFile", "egenLogback.xml")
+    System.setProperty("logback.configurationFile", Configuration.logbackConfigurationFile())
 
     val log = KotlinLogging.logger {}
     val securelog = KotlinLogging.logger("tjenestekall")
