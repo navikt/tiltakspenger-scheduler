@@ -15,6 +15,6 @@ class HourlyEventsGenerator(private val events: EventsPublisher) {
         log.info { "Genererer events for $wholeHour" }
 
         // Hour
-        events.publishHourHasBegun(HourHasBegun.of(wholeHour))
+        events.publishHourHasBegun(HourHasBegun(wholeHour))
     }
 }
