@@ -7,6 +7,7 @@ import org.quartz.Job
 import org.quartz.JobExecutionContext
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.util.Date
 
 
 private val log = KotlinLogging.logger {}
@@ -20,13 +21,21 @@ class HourlyPassageOfTimeEventsPublishingJob(
     override fun execute(context: JobExecutionContext) {
         log.info { "Executing HourlyPassageOfTimeEventsPublishingJob" }
         log.info { "LocalDateTime.now(): ${LocalDateTime.now()}" }
-        val startTime = context.trigger.startTime
+        val startTime = context.trigger.startTime // TODO: Det viser seg at denne ikke er korrekt dessverre!
         log.info { "context.trigger.starttime $startTime" }
+
+        val nextFireTime = context.trigger.nextFireTime
+        val subsequentFireTime = context.trigger.getFireTimeAfter(nextFireTime);
+        val interval = subsequentFireTime.time - nextFireTime.time;
+
+        val thisFireTime = Date(nextFireTime.time - interval)
+        log.info { "thisFireTime $thisFireTime" }
+
         val localDateTime = LocalDateTime.ofInstant(
-            startTime.toInstant(),
+            thisFireTime.toInstant(),
             ZoneId.systemDefault()
         )
-        log.info { "starttime converted $localDateTime" }
+        log.info { "thisFireTime converted $localDateTime" }
         hourlyEventsGenerator.generateEventsFor(localDateTime)
     }
 }
