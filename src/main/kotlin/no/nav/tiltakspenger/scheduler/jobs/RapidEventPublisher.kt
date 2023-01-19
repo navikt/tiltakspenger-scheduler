@@ -13,29 +13,29 @@ private val log = KotlinLogging.logger {}
 class RapidEventPublisher(private val rapidsConnection: RapidsConnection) : EventsPublisher {
     override fun publishDayHasBegun(dayHasBegun: DayHasBegun) {
         log.info { "Publising dayHasBegun" }
-        publish("dayHasBegun" to dayHasBegun.date.toString())
+        publish("dayHasBegunEvent", "dayHasBegun" to dayHasBegun.date.toString())
     }
 
     override fun publishWeekHasBegun(weekHasBegun: WeekHasBegun) {
         log.info { "Publising weekHasBegun" }
-        publish("weekHasBegun" to weekHasBegun.yearWeek.toString())
+        publish("weekHasBegunEvent", "weekHasBegun" to weekHasBegun.yearWeek.toString())
     }
 
     override fun publishMonthHasBegun(monthHasBegun: MonthHasBegun) {
         log.info { "Publising monthHasBegun" }
-        publish("monthHasBegun" to monthHasBegun.month.toString())
+        publish("monthHasBegunEvent", "monthHasBegun" to monthHasBegun.month.toString())
     }
 
     override fun publishYearHasBegun(yearHasBegun: YearHasBegun) {
         log.info { "Publising yearHasBegun" }
-        publish("yearHasBegun" to yearHasBegun.year.toString())
+        publish("yearHasBegunEvent", "yearHasBegun" to yearHasBegun.year.toString())
     }
 
-    private fun publish(messagePair: Pair<String, Any>) {
+    private fun publish(eventName: String, messagePair: Pair<String, Any>) {
         val uuid = UUID.randomUUID().toString()
 
         mutableMapOf(
-            "@event_name" to "passage_of_time",
+            "@event_name" to eventName,
             "@opprettet" to LocalDateTime.now(),
             "@id" to uuid,
         )
