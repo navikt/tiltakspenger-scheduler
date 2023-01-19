@@ -1,7 +1,7 @@
 tiltakspenger
 ================
 
-Håndterer...
+Publiserer passage of time events
 
 Blir publisert følgende events for 1. januar 2023:
 "yearHasBegun" :"2023"
