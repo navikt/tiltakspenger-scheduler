@@ -12,6 +12,7 @@ import java.util.Date
 
 private val log = KotlinLogging.logger {}
 
+@Suppress("TooGenericExceptionCaught")
 class HourlyPassageOfTimeEventsPublishingJob(
     rapidsConnection: RapidsConnection,
     private val hourlyEventsGenerator: HourlyEventsGenerator = HourlyEventsGenerator(

@@ -13,7 +13,8 @@ import org.quartz.TriggerBuilder.newTrigger
 class SchedulingService(
     databaseConfig: Configuration.DatabaseConfig,
     rapidsConnection: RapidsConnection,
-    scheduleBuilder: ScheduleBuilder<*> = dailyAtHourAndMinute(0, 0)
+    scheduleBuilder: ScheduleBuilder<*> =
+        dailyAtHourAndMinute(0, 0) //.withMisfireHandlingInstructionFireAndProceed()
 ) {
 
     companion object {
@@ -27,11 +28,13 @@ class SchedulingService(
     private val dailyTrigger = newTrigger()
         .withIdentity("dailyTrigger", "onlyGroup")
         .withSchedule(scheduleBuilder)
+
         .build()
 
+    private val hourlySchedule = cronSchedule(ON_THE_HOUR_EVERY_HOUR) //.withMisfireHandlingInstructionFireAndProceed())
     private val hourlyTrigger = newTrigger()
         .withIdentity("hourlyTrigger", "onlyGroup")
-        .withSchedule(cronSchedule(ON_THE_HOUR_EVERY_HOUR))
+        .withSchedule(hourlySchedule)
         .build()
 
     private var dailyJob: JobDetail = newJob(DailyPassageOfTimeEventsPublishingJob::class.java)
