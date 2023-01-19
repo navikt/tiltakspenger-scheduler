@@ -30,6 +30,9 @@ class HourlyPassageOfTimeEventsPublishingJob(
         log.info { "subsequentFireTime $subsequentFireTime" }
         val interval = subsequentFireTime.time - nextFireTime.time;
 
+        val previousFireTime = context.trigger.previousFireTime
+        log.info { "previousFireTime $previousFireTime" }
+        
         val thisFireTime = Date(nextFireTime.time - interval)
         log.info { "thisFireTime $thisFireTime" }
 
