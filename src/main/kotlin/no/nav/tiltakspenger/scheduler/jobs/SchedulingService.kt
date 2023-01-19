@@ -2,33 +2,51 @@ package no.nav.tiltakspenger.scheduler.jobs
 
 import no.nav.helse.rapids_rivers.RapidsConnection
 import no.nav.tiltakspenger.scheduler.Configuration
+import org.quartz.CronScheduleBuilder.cronSchedule
 import org.quartz.CronScheduleBuilder.dailyAtHourAndMinute
 import org.quartz.JobBuilder.newJob
 import org.quartz.JobDetail
 import org.quartz.ScheduleBuilder
 import org.quartz.TriggerBuilder.newTrigger
 
+
 class SchedulingService(
     databaseConfig: Configuration.DatabaseConfig,
     rapidsConnection: RapidsConnection,
-    private val scheduleBuilder: ScheduleBuilder<*> = dailyAtHourAndMinute(0, 0)
+    scheduleBuilder: ScheduleBuilder<*> = dailyAtHourAndMinute(0, 0)
 ) {
+
+    companion object {
+        private const val ON_THE_HOUR_EVERY_HOUR = "0 0 * * * ?"
+    }
+
     private val publisherJobFactory = PublishingJobFactory(rapidsConnection)
     private val scheduler =
         JobSchedulerManager(databaseConfig = databaseConfig, jobFactory = publisherJobFactory).scheduler()
 
-    private val trigger = newTrigger()
+    private val dailyTrigger = newTrigger()
         .withIdentity("dailyTrigger", "onlyGroup")
         .withSchedule(scheduleBuilder)
         .build()
 
-    private var job: JobDetail = newJob(PassageOfTimeEventsPublishingJob::class.java)
+    private val hourlyTrigger = newTrigger()
+        .withIdentity("hourlyTrigger", "onlyGroup")
+        .withSchedule(cronSchedule(ON_THE_HOUR_EVERY_HOUR))
+        .build()
+
+    private var dailyJob: JobDetail = newJob(DailyPassageOfTimeEventsPublishingJob::class.java)
         .withIdentity("dailyJob", "onlyGroup")
         .build()
 
+    private var hourlyJob: JobDetail = newJob(HourlyPassageOfTimeEventsPublishingJob::class.java)
+        .withIdentity("hourlyJob", "onlyGroup")
+        .build()
+
     fun scheduleJob() {
-        scheduler.deleteJob(job.key)
-        scheduler.scheduleJob(job, trigger)
+        scheduler.deleteJob(dailyJob.key)
+        scheduler.deleteJob(hourlyJob.key)
+        scheduler.scheduleJob(dailyJob, dailyTrigger)
+        scheduler.scheduleJob(hourlyJob, hourlyTrigger)
     }
 
     fun start() {

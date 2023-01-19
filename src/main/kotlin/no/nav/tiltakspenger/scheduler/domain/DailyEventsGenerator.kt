@@ -5,9 +5,9 @@ import org.threeten.extra.YearWeek
 import java.time.*
 
 
-val log = KotlinLogging.logger {}
+private val log = KotlinLogging.logger {}
 
-class EventsGenerator(private val events: EventsPublisher) {
+class DailyEventsGenerator(private val events: EventsPublisher) {
 
     fun generateEventsFor(date: LocalDate) {
         log.info { "Genererer events for $date" }

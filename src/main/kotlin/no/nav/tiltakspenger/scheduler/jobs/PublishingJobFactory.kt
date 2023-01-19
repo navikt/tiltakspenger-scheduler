@@ -10,6 +10,7 @@ import kotlin.reflect.jvm.jvmName
 
 private val log = KotlinLogging.logger {}
 
+@Suppress("ReturnCount")
 class PublishingJobFactory(
     private val rapidsConnection: RapidsConnection
 ) : JobFactory {
@@ -18,7 +19,16 @@ class PublishingJobFactory(
         log.info("Creating new job")
         val jobClass = bundle.jobDetail.jobClass
         if (jobClass.name == PassageOfTimeEventsPublishingJob::class.jvmName) {
-            return PassageOfTimeEventsPublishingJob(rapidsConnection)
+            log.info("Creating PassageOfTimeEventsPublishingJob")
+            return PassageOfTimeEventsPublishingJob()
+        }
+        if (jobClass.name == DailyPassageOfTimeEventsPublishingJob::class.jvmName) {
+            log.info("Creating DailyPassageOfTimeEventsPublishingJob")
+            return DailyPassageOfTimeEventsPublishingJob(rapidsConnection)
+        }
+        if (jobClass.name == HourlyPassageOfTimeEventsPublishingJob::class.jvmName) {
+            log.info("Creating HourlyPassageOfTimeEventsPublishingJob")
+            return DailyPassageOfTimeEventsPublishingJob(rapidsConnection)
         }
         throw NotImplementedError("Job Factory error")
     }

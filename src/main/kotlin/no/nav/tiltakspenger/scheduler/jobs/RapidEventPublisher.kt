@@ -31,6 +31,11 @@ class RapidEventPublisher(private val rapidsConnection: RapidsConnection) : Even
         publish("yearHasBegunEvent", "yearHasBegun" to yearHasBegun.year.toString())
     }
 
+    override fun publishHourHasBegun(hourHasBegun: HourHasBegun) {
+        log.info { "Publising hourHasBegun" }
+        publish("hourHasBegunEvent", "hourHasBegun" to hourHasBegun.time.toString())
+    }
+
     private fun publish(eventName: String, messagePair: Pair<String, Any>) {
         val uuid = UUID.randomUUID().toString()
 
@@ -42,7 +47,7 @@ class RapidEventPublisher(private val rapidsConnection: RapidsConnection) : Even
             .plus(messagePair)
             .let { JsonMessage.newMessage(it) }
             .also { message ->
-                log.info { "Publishing ${message.toJson()}" }
+                log.info { "Publishing PassageOfTime event ${message.toJson()}" }
                 rapidsConnection.publish(uuid, message.toJson())
             }
     }
