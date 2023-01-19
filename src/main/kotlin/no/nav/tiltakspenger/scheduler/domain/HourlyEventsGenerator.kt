@@ -10,7 +10,8 @@ private val log = KotlinLogging.logger {}
 class HourlyEventsGenerator(private val events: EventsPublisher) {
 
     fun generateEventsFor(time: LocalDateTime) {
-        val wholeHour = time.truncatedTo(ChronoUnit.HOURS);
+        val wholeHour: LocalDateTime = time.truncatedTo(ChronoUnit.HOURS)
+
         log.info { "Genererer events for $wholeHour" }
 
         // Hour

@@ -28,7 +28,7 @@ class PublishingJobFactory(
         }
         if (jobClass.name == HourlyPassageOfTimeEventsPublishingJob::class.jvmName) {
             log.info("Creating HourlyPassageOfTimeEventsPublishingJob")
-            return DailyPassageOfTimeEventsPublishingJob(rapidsConnection)
+            return HourlyPassageOfTimeEventsPublishingJob(rapidsConnection)
         }
         throw NotImplementedError("Job Factory error")
     }
