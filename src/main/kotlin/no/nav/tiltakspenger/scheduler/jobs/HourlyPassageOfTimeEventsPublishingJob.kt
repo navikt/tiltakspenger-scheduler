@@ -32,12 +32,15 @@ class HourlyPassageOfTimeEventsPublishingJob(
 
         val previousFireTime = context.trigger.previousFireTime
         log.info { "previousFireTime $previousFireTime" }
-        
+
+        val scheduledFireTime = context.scheduledFireTime
+        log.info { "scheduledFireTime $scheduledFireTime" }
+
         val thisFireTime = Date(nextFireTime.time - interval)
         log.info { "thisFireTime $thisFireTime" }
 
         val localDateTime = LocalDateTime.ofInstant(
-            thisFireTime.toInstant(),
+            scheduledFireTime.toInstant(),
             ZoneId.systemDefault()
         )
         log.info { "thisFireTime converted $localDateTime" }
