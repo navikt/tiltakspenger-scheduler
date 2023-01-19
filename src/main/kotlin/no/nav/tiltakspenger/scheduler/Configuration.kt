@@ -5,17 +5,14 @@ import com.natpryce.konfig.*
 import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 import no.nav.tiltakspenger.scheduler.db.DataSource
 
-private const val APPLICATION_NAME = "tiltakspenger-scheduler"
-
 enum class Profile {
     LOCAL, DEV, PROD
 }
 
-
 object Configuration {
 
     val rapidsAndRivers = mapOf(
-        "RAPID_APP_NAME" to APPLICATION_NAME,
+        "RAPID_APP_NAME" to "tiltakspenger-scheduler",
         "KAFKA_BROKERS" to System.getenv("KAFKA_BROKERS"),
         "KAFKA_CREDSTORE_PASSWORD" to System.getenv("KAFKA_CREDSTORE_PASSWORD"),
         "KAFKA_TRUSTSTORE_PATH" to System.getenv("KAFKA_TRUSTSTORE_PATH"),
@@ -70,7 +67,7 @@ object Configuration {
     fun logbackConfigurationFile() = config()[Key("logback.configurationFile", stringType)]
 
     private fun getEnvOrProp(key: String) = System.getenv(key) ?: System.getProperty(key)
-    
+
     data class DatabaseConfig(
         val database: String = getEnvOrProp(DataSource.DB_DATABASE_KEY),
         val host: String = getEnvOrProp(DataSource.DB_HOST_KEY),

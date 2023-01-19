@@ -36,7 +36,7 @@ fun main() {
             }
 
             override fun onShutdown(rapidsConnection: RapidsConnection) {
-                log.info { "Stopping tiltakspenger-skjerming" }
+                log.info { "Stopping tiltakspenger-scheduler" }
                 scheduler.stop()
                 super.onShutdown(rapidsConnection)
             }
