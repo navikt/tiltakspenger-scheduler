@@ -8,10 +8,8 @@ import org.quartz.JobExecutionContext
 import java.time.LocalDateTime
 import java.time.ZoneId
 
-
 private val LOG = KotlinLogging.logger {}
 
-@Suppress("TooGenericExceptionCaught")
 class HourlyPassageOfTimeEventsPublishingJob(
     rapidsConnection: RapidsConnection,
     private val hourlyEventsGenerator: HourlyEventsGenerator = HourlyEventsGenerator(

@@ -2,8 +2,11 @@ package no.nav.tiltakspenger.scheduler.domain
 
 import mu.KotlinLogging
 import org.threeten.extra.YearWeek
-import java.time.*
-
+import java.time.LocalDate
+import java.time.Month
+import java.time.MonthDay
+import java.time.Year
+import java.time.YearMonth
 
 private val log = KotlinLogging.logger {}
 

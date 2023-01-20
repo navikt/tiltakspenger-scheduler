@@ -7,7 +7,6 @@ import org.quartz.impl.StdSchedulerFactory
 import org.quartz.spi.JobFactory
 import java.util.Properties
 
-@Suppress("MagicNumber")
 class JobSchedulerManager(
     private val databaseConfig: Configuration.DatabaseConfig,
     private val jobFactory: JobFactory
@@ -34,7 +33,6 @@ class JobSchedulerManager(
         props["org.quartz.dataSource.quartzDS.user"] = "${databaseConfig.user}"
         props["org.quartz.dataSource.quartzDS.password"] = "${databaseConfig.password}"
         props["org.quartz.dataSource.quartzDS.maxConnections"] = "10"
-
 
         // props["org.quartz.plugin.triggHistory.class"] = "org.quartz.plugins.history.LoggingTriggerHistoryPlugin"
         // props["org.quartz.plugin.triggHistory.triggerFiredMessage"] =

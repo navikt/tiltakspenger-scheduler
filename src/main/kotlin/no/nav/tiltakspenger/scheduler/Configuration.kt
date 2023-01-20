@@ -1,8 +1,11 @@
 package no.nav.tiltakspenger.scheduler
 
-
-import com.natpryce.konfig.*
+import com.natpryce.konfig.ConfigurationMap
 import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
+import com.natpryce.konfig.EnvironmentVariables
+import com.natpryce.konfig.Key
+import com.natpryce.konfig.overriding
+import com.natpryce.konfig.stringType
 import no.nav.tiltakspenger.scheduler.db.DataSource
 
 enum class Profile {

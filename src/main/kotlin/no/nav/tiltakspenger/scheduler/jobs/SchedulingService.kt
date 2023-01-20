@@ -9,12 +9,11 @@ import org.quartz.JobDetail
 import org.quartz.ScheduleBuilder
 import org.quartz.TriggerBuilder.newTrigger
 
-
 class SchedulingService(
     databaseConfig: Configuration.DatabaseConfig,
     rapidsConnection: RapidsConnection,
     scheduleBuilder: ScheduleBuilder<*> =
-        dailyAtHourAndMinute(0, 0) //.withMisfireHandlingInstructionFireAndProceed()
+        dailyAtHourAndMinute(0, 0) // .withMisfireHandlingInstructionFireAndProceed()
 ) {
 
     companion object {
@@ -28,10 +27,9 @@ class SchedulingService(
     private val dailyTrigger = newTrigger()
         .withIdentity("dailyTrigger", "onlyGroup")
         .withSchedule(scheduleBuilder)
-
         .build()
 
-    private val hourlySchedule = cronSchedule(ON_THE_HOUR_EVERY_HOUR) //.withMisfireHandlingInstructionFireAndProceed())
+    private val hourlySchedule = cronSchedule(ON_THE_HOUR_EVERY_HOUR) // .withMisfireHandlingInstructionFireAndProceed())
     private val hourlyTrigger = newTrigger()
         .withIdentity("hourlyTrigger", "onlyGroup")
         .withSchedule(hourlySchedule)
@@ -44,7 +42,7 @@ class SchedulingService(
     private var hourlyJob: JobDetail = newJob(HourlyPassageOfTimeEventsPublishingJob::class.java)
         .withIdentity("hourlyJob", "onlyGroup")
         .build()
-    
+
     fun scheduleJob() {
         scheduler.deleteJob(dailyJob.key)
         scheduler.deleteJob(hourlyJob.key)

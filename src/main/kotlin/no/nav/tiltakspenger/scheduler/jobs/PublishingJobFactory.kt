@@ -10,7 +10,6 @@ import kotlin.reflect.jvm.jvmName
 
 private val LOG = KotlinLogging.logger {}
 
-@Suppress("ReturnCount")
 class PublishingJobFactory(
     private val rapidsConnection: RapidsConnection
 ) : JobFactory {

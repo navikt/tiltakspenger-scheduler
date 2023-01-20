@@ -3,10 +3,14 @@ package no.nav.tiltakspenger.scheduler.jobs
 import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.JsonMessage
 import no.nav.helse.rapids_rivers.RapidsConnection
-import no.nav.tiltakspenger.scheduler.domain.*
+import no.nav.tiltakspenger.scheduler.domain.DayHasBegun
+import no.nav.tiltakspenger.scheduler.domain.EventsPublisher
+import no.nav.tiltakspenger.scheduler.domain.HourHasBegun
+import no.nav.tiltakspenger.scheduler.domain.MonthHasBegun
+import no.nav.tiltakspenger.scheduler.domain.WeekHasBegun
+import no.nav.tiltakspenger.scheduler.domain.YearHasBegun
 import java.time.LocalDateTime
 import java.util.UUID
-
 
 private val LOG = KotlinLogging.logger {}
 
