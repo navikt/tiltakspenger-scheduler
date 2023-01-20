@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 
 
-private val log = KotlinLogging.logger {}
+private val LOG = KotlinLogging.logger {}
 
 @Suppress("TooGenericExceptionCaught")
 class HourlyPassageOfTimeEventsPublishingJob(
@@ -19,20 +19,20 @@ class HourlyPassageOfTimeEventsPublishingJob(
     )
 ) : Job {
     override fun execute(context: JobExecutionContext) {
-        log.info { "Executing HourlyPassageOfTimeEventsPublishingJob" }
+        LOG.info { "Executing HourlyPassageOfTimeEventsPublishingJob" }
         val localDateTime = findScheduledTime(context)
         hourlyEventsGenerator.generateEventsFor(localDateTime)
     }
 
     private fun findScheduledTime(context: JobExecutionContext): LocalDateTime {
-        log.info { "LocalDateTime.now(): ${LocalDateTime.now()}" }
+        LOG.info { "LocalDateTime.now: ${LocalDateTime.now()}" }
         val scheduledFireTime = context.scheduledFireTime
-        log.info { "scheduledFireTime $scheduledFireTime" }
+        LOG.info { "scheduledFireTime $scheduledFireTime" }
         val localDateTime = LocalDateTime.ofInstant(
             scheduledFireTime.toInstant(),
             ZoneId.systemDefault()
         )
-        log.info { "scheduledFireTime converted $localDateTime" }
+        LOG.info { "scheduledFireTime converted to LocalDateTime $localDateTime" }
         return localDateTime
     }
 }

@@ -44,7 +44,7 @@ class SchedulingService(
     private var hourlyJob: JobDetail = newJob(HourlyPassageOfTimeEventsPublishingJob::class.java)
         .withIdentity("hourlyJob", "onlyGroup")
         .build()
-
+    
     fun scheduleJob() {
         scheduler.deleteJob(dailyJob.key)
         scheduler.deleteJob(hourlyJob.key)
