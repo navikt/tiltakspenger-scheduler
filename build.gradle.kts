@@ -41,9 +41,9 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic:1.4.5")
     runtimeOnly("org.postgresql:postgresql:42.5.1")
 
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation(platform("org.junit:junit-bom:5.9.2"))
     testRuntimeOnly("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.mockk:mockk-jvm:$mockkVersion")
     testImplementation("io.mockk:mockk-dsl-jvm:$mockkVersion")
