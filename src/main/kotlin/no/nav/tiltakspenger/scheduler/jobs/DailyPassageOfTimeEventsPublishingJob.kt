@@ -12,7 +12,7 @@ private val LOG = KotlinLogging.logger {}
 
 class DailyPassageOfTimeEventsPublishingJob(
     rapidsConnection: RapidsConnection,
-    private val dailyEventsGenerator: DailyEventsGenerator = DailyEventsGenerator(RapidEventPublisher(rapidsConnection))
+    private val dailyEventsGenerator: DailyEventsGenerator = DailyEventsGenerator(RapidEventPublisher(rapidsConnection)),
 ) : Job {
     override fun execute(context: JobExecutionContext) {
         LOG.info { "Executing DailyPassageOfTimeEventsPublishingJob" }
@@ -21,7 +21,7 @@ class DailyPassageOfTimeEventsPublishingJob(
         LOG.info { "scheduledFireTime $scheduledFireTime" }
         val localDate = LocalDateTime.ofInstant(
             scheduledFireTime.toInstant(),
-            ZoneId.systemDefault()
+            ZoneId.systemDefault(),
         ).toLocalDate()
         LOG.info { "scheduledFireTime converted to LocalDate: $localDate" }
         dailyEventsGenerator.generateEventsFor(localDate)

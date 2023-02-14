@@ -27,7 +27,7 @@ object Configuration {
 
     private val otherDefaultProperties = mapOf(
         "application.httpPort" to 8080.toString(),
-        "logback.configurationFile" to "logback.xml"
+        "logback.configurationFile" to "logback.xml",
     )
 
     private val defaultProperties = ConfigurationMap(rapidsAndRivers + otherDefaultProperties)
@@ -36,17 +36,17 @@ object Configuration {
         mapOf(
             "application.profile" to Profile.LOCAL.toString(),
             "logback.configurationFile" to "logback.local.xml",
-        )
+        ),
     )
     private val devProperties = ConfigurationMap(
         mapOf(
             "application.profile" to Profile.DEV.toString(),
-        )
+        ),
     )
     private val prodProperties = ConfigurationMap(
         mapOf(
             "application.profile" to Profile.PROD.toString(),
-        )
+        ),
     )
 
     private fun config() = when (System.getenv("NAIS_CLUSTER_NAME") ?: System.getProperty("NAIS_CLUSTER_NAME")) {

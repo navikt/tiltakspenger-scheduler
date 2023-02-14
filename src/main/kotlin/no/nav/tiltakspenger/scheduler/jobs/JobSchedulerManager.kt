@@ -9,11 +9,10 @@ import java.util.Properties
 
 class JobSchedulerManager(
     private val databaseConfig: Configuration.DatabaseConfig,
-    private val jobFactory: JobFactory
+    private val jobFactory: JobFactory,
 ) {
 
     fun scheduler(): Scheduler {
-
         val props = Properties()
 
         props["org.quartz.scheduler.instanceName"] = "PassageOfTimeScheduler"

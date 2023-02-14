@@ -19,10 +19,9 @@ fun main() {
     }
 
     RapidApplication.create(Configuration.rapidsAndRivers).apply {
-
         val scheduler = SchedulingService(
             databaseConfig = Configuration.databaseConfig(),
-            rapidsConnection = this
+            rapidsConnection = this,
         )
 
         register(object : RapidsConnection.StatusListener {

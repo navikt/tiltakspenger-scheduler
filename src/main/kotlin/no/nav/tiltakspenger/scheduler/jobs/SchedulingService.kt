@@ -13,7 +13,7 @@ class SchedulingService(
     databaseConfig: Configuration.DatabaseConfig,
     rapidsConnection: RapidsConnection,
     scheduleBuilder: ScheduleBuilder<*> =
-        dailyAtHourAndMinute(0, 0) // .withMisfireHandlingInstructionFireAndProceed()
+        dailyAtHourAndMinute(0, 0), // .withMisfireHandlingInstructionFireAndProceed()
 ) {
 
     companion object {

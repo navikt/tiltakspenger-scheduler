@@ -11,7 +11,7 @@ import kotlin.reflect.jvm.jvmName
 private val LOG = KotlinLogging.logger {}
 
 class PublishingJobFactory(
-    private val rapidsConnection: RapidsConnection
+    private val rapidsConnection: RapidsConnection,
 ) : JobFactory {
 
     override fun newJob(bundle: TriggerFiredBundle, scheduler: Scheduler): Job {
