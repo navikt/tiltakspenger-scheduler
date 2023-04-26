@@ -2,7 +2,7 @@ val javaVersion = JavaVersion.VERSION_17
 val prometheusVersion = "0.15.0"
 val ktorVersion = "2.2.4"
 val jacksonVersion = "2.14.1"
-val mockkVersion = "1.13.4"
+val mockkVersion = "1.13.5"
 val kotestVersion = "5.5.5"
 val testContainersVersion = "1.17.6"
 
