@@ -10,7 +10,7 @@ val testContainersVersion = "1.19.3"
 plugins {
     application
     kotlin("jvm") version "1.9.20"
-    id("com.diffplug.spotless") version "6.21.0"
+    id("com.diffplug.spotless") version "6.23.1"
     // id("ca.cutterslade.analyze") version "1.9.1"
 }
 
