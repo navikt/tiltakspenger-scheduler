@@ -43,7 +43,7 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testRuntimeOnly("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.mockk:mockk-jvm:$mockkVersion")
     testImplementation("io.mockk:mockk-dsl-jvm:$mockkVersion")
