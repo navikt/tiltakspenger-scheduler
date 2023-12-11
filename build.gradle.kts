@@ -41,7 +41,7 @@ dependencies {
 
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.4")
     runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
-    runtimeOnly("org.postgresql:postgresql:42.7.0")
+    runtimeOnly("org.postgresql:postgresql:42.7.1")
 
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testRuntimeOnly("org.junit.jupiter:junit-jupiter")
