@@ -35,9 +35,8 @@ dependencies {
     implementation("org.quartz-scheduler:quartz:2.3.2")
     implementation("org.threeten:threeten-extra:1.7.2")
 
-    implementation("org.flywaydb:flyway-core:10.1.0")
-    // implementation("com.zaxxer:HikariCP:5.0.1")
-    implementation("com.zaxxer:HikariCP-java7:2.4.13")
+    implementation("org.flywaydb:flyway-database-postgresql:10.2.0")
+    implementation("com.zaxxer:HikariCP:5.1.0")
 
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.4")
     runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
