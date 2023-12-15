@@ -35,7 +35,7 @@ dependencies {
     implementation("org.quartz-scheduler:quartz:2.3.2")
     implementation("org.threeten:threeten-extra:1.7.2")
 
-    implementation("org.flywaydb:flyway-database-postgresql:10.2.0")
+    implementation("org.flywaydb:flyway-database-postgresql:10.3.0")
     implementation("com.zaxxer:HikariCP:5.1.0")
 
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.4")
