@@ -39,7 +39,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.1.0")
 
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.4")
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.3")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.4")
     runtimeOnly("org.postgresql:postgresql:42.7.3")
 
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
