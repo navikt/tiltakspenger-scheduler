@@ -3,7 +3,7 @@ val prometheusVersion = "0.15.0"
 val ktorVersion = "2.3.11"
 val jacksonVersion = "2.14.1"
 val mockkVersion = "1.13.10"
-val kotestVersion = "5.8.1"
+val kotestVersion = "5.9.0"
 val testContainersVersion = "1.19.8"
 
 
