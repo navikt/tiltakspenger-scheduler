@@ -28,7 +28,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
     implementation("org.jetbrains:annotations:24.1.0")
-    implementation("com.github.navikt:rapids-and-rivers:2024041714471713358051.71746f05c18e")
+    implementation("com.github.navikt:rapids-and-rivers:2024061314381718282339.84de68050682")
     implementation("com.natpryce:konfig:1.6.10.0")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 
