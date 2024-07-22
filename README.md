@@ -1,3 +1,5 @@
+Dette repoet arkiveres da vi ikke lenger trenger en kafka-skedulerer av denne typen.
+
 tiltakspenger
 ================
 
